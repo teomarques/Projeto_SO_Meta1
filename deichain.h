@@ -22,6 +22,8 @@
 #define NAMED_PIPE "VALIDATOR_INPUT"
 #define MAX_TRANSACTIONS 10000
 #define MAX_BLOCKS 50000
+#define MAX_TRANSACTIONS_PER_BLOCK 100 //sizeof(Block) in validator wont work as flexible array
+
 
 // IPC Keys
 #define SHM_KEY_TRANS_POOL 0x1234
@@ -46,7 +48,7 @@ typedef struct {
     time_t timestamp;
     int nonce;
     int num_transactions;
-    Transaction transactions[];
+    Transaction transactions[MAX_TRANSACTIONS_PER_BLOCK];
 } Block;
 
 typedef struct {
